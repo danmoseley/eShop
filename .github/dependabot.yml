@@ -58,8 +58,8 @@ updates:
         patterns:
           - "Duende.*"
 
- - package-ecosystem: nuget
-     target-branch: release/9.0
+  - package-ecosystem: nuget
+    target-branch: release/9.0
     directory: "/"
     registries:
       - public-nuget
