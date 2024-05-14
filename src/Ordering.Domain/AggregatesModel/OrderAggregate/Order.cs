@@ -84,11 +84,6 @@ public class Order
             _orderItems.Add(orderItem);
         }
     }
-
-    public void SetPaymentMethodVerified(int buyerId)
-    {
-        BuyerId = buyerId;
-    }
     
     public void SetAwaitingValidationStatus()
     {

@@ -105,31 +105,6 @@ namespace Ordering.Infrastructure.Migrations
                     b.ToTable("cardtypes", "ordering");
                 });
 
-            modelBuilder.Entity("eShop.Ordering.Domain.AggregatesModel.BuyerAggregate.PaymentMethod", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseHiLo(b.Property<int>("Id"), "paymentseq");
-
-                    b.Property<int>("BuyerId")
-                        .HasColumnType("integer");
-
-                    b.Property<string>("_alias")
-                        .IsRequired()
-                        .HasMaxLength(200)
-                        .HasColumnType("character varying(200)")
-                        .HasColumnName("Alias");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("BuyerId");
-
-                    b.HasIndex("_cardTypeId");
-
-                    b.ToTable("paymentmethods", "ordering");
-                });
 
             modelBuilder.Entity("eShop.Ordering.Domain.AggregatesModel.OrderAggregate.Order", b =>
                 {
@@ -155,15 +130,9 @@ namespace Ordering.Infrastructure.Migrations
                         .HasColumnType("timestamp with time zone")
                         .HasColumnName("OrderDate");
 
-                    b.Property<int?>("_paymentMethodId")
-                        .HasColumnType("integer")
-                        .HasColumnName("PaymentMethodId");
-
                     b.HasKey("Id");
 
                     b.HasIndex("_buyerId");
-
-                    b.HasIndex("_paymentMethodId");
 
                     b.ToTable("orders", "ordering");
                 });
@@ -228,33 +197,11 @@ namespace Ordering.Infrastructure.Migrations
                     b.ToTable("requests", "ordering");
                 });
 
-            modelBuilder.Entity("eShop.Ordering.Domain.AggregatesModel.BuyerAggregate.PaymentMethod", b =>
-                {
-                    b.HasOne("eShop.Ordering.Domain.AggregatesModel.BuyerAggregate.Buyer", null)
-                        .WithMany("PaymentMethods")
-                        .HasForeignKey("BuyerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("eShop.Ordering.Domain.AggregatesModel.BuyerAggregate.CardType", "CardType")
-                        .WithMany()
-                        .HasForeignKey("_cardTypeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("CardType");
-                });
-
             modelBuilder.Entity("eShop.Ordering.Domain.AggregatesModel.OrderAggregate.Order", b =>
                 {
                     b.HasOne("eShop.Ordering.Domain.AggregatesModel.BuyerAggregate.Buyer", null)
                         .WithMany()
                         .HasForeignKey("_buyerId");
-
-                    b.HasOne("eShop.Ordering.Domain.AggregatesModel.BuyerAggregate.PaymentMethod", null)
-                        .WithMany()
-                        .HasForeignKey("_paymentMethodId")
-                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.OwnsOne("eShop.Ordering.Domain.AggregatesModel.OrderAggregate.Address", "Address", b1 =>
                         {
@@ -295,11 +242,6 @@ namespace Ordering.Infrastructure.Migrations
                         .HasForeignKey("OrderId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("eShop.Ordering.Domain.AggregatesModel.BuyerAggregate.Buyer", b =>
-                {
-                    b.Navigation("PaymentMethods");
                 });
 
             modelBuilder.Entity("eShop.Ordering.Domain.AggregatesModel.OrderAggregate.Order", b =>
