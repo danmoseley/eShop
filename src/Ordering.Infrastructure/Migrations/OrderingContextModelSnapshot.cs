@@ -122,27 +122,6 @@ namespace Ordering.Infrastructure.Migrations
                         .HasColumnType("character varying(200)")
                         .HasColumnName("Alias");
 
-                    b.Property<string>("_cardHolderName")
-                        .IsRequired()
-                        .HasMaxLength(200)
-                        .HasColumnType("character varying(200)")
-                        .HasColumnName("CardHolderName");
-
-                    b.Property<string>("_cardNumber")
-                        .IsRequired()
-                        .HasMaxLength(25)
-                        .HasColumnType("character varying(25)")
-                        .HasColumnName("CardNumber");
-
-                    b.Property<int>("_cardTypeId")
-                        .HasColumnType("integer")
-                        .HasColumnName("CardTypeId");
-
-                    b.Property<DateTime>("_expiration")
-                        .HasMaxLength(25)
-                        .HasColumnType("timestamp with time zone")
-                        .HasColumnName("Expiration");
-
                     b.HasKey("Id");
 
                     b.HasIndex("BuyerId");

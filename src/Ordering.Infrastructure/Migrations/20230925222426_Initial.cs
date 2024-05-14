@@ -93,12 +93,8 @@ namespace Ordering.Infrastructure.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "integer", nullable: false),
-                    CardTypeId = table.Column<int>(type: "integer", nullable: false),
                     BuyerId = table.Column<int>(type: "integer", nullable: false),
                     Alias = table.Column<string>(type: "character varying(200)", maxLength: 200, nullable: false),
-                    CardHolderName = table.Column<string>(type: "character varying(200)", maxLength: 200, nullable: false),
-                    CardNumber = table.Column<string>(type: "character varying(25)", maxLength: 25, nullable: false),
-                    Expiration = table.Column<DateTime>(type: "timestamp with time zone", maxLength: 25, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -108,13 +104,6 @@ namespace Ordering.Infrastructure.Migrations
                         column: x => x.BuyerId,
                         principalSchema: "ordering",
                         principalTable: "buyers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_paymentmethods_cardtypes_CardTypeId",
-                        column: x => x.CardTypeId,
-                        principalSchema: "ordering",
-                        principalTable: "cardtypes",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });

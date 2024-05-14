@@ -165,17 +165,6 @@ namespace eShop.Identity.API.Data.Migrations
                     b.Property<int>("AccessFailedCount")
                         .HasColumnType("integer");
 
-                    b.Property<string>("CardHolderName")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("CardNumber")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<int>("CardType")
-                        .HasColumnType("integer");
-
                     b.Property<string>("City")
                         .IsRequired()
                         .HasColumnType("text");
@@ -194,10 +183,6 @@ namespace eShop.Identity.API.Data.Migrations
 
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("boolean");
-
-                    b.Property<string>("Expiration")
-                        .IsRequired()
-                        .HasColumnType("text");
 
                     b.Property<string>("LastName")
                         .IsRequired()
@@ -229,10 +214,6 @@ namespace eShop.Identity.API.Data.Migrations
 
                     b.Property<bool>("PhoneNumberConfirmed")
                         .HasColumnType("boolean");
-
-                    b.Property<string>("SecurityNumber")
-                        .IsRequired()
-                        .HasColumnType("text");
 
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("text");

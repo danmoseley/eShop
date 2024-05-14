@@ -19,12 +19,7 @@ public class OrderBuilder
         order = new Order(
             "userId",
             "fakeName",
-            address,
-            cardTypeId: 5,
-            cardNumber: "12",
-            cardSecurityNumber: "123",
-            cardHolderName: "name",
-            cardExpiration: DateTime.UtcNow);
+            address);
     }
 
     public OrderBuilder AddOne(

@@ -13,21 +13,15 @@ public class UsersSeed(ILogger<UsersSeed> logger, UserManager<ApplicationUser> u
             {
                 UserName = "alice",
                 Email = "AliceSmith@email.com",
-                EmailConfirmed = true,
-                CardHolderName = "Alice Smith",
-                CardNumber = "4012888888881881",
-                CardType = 1,
                 City = "Redmond",
                 Country = "U.S.",
-                Expiration = "12/24",
                 Id = Guid.NewGuid().ToString(),
                 LastName = "Smith",
                 Name = "Alice",
                 PhoneNumber = "1234567890",
                 ZipCode = "98052",
                 State = "WA",
-                Street = "15703 NE 61st Ct",
-                SecurityNumber = "123"
+                Street = "15703 NE 61st Ct"
             };
 
             var result = userManager.CreateAsync(alice, "Pass123$").Result;
@@ -59,21 +53,16 @@ public class UsersSeed(ILogger<UsersSeed> logger, UserManager<ApplicationUser> u
                 UserName = "bob",
                 Email = "BobSmith@email.com",
                 EmailConfirmed = true,
-                CardHolderName = "Bob Smith",
-                CardNumber = "4012888888881881",
-                CardType = 1,
                 City = "Redmond",
                 Country = "U.S.",
-                Expiration = "12/24",
                 Id = Guid.NewGuid().ToString(),
                 LastName = "Smith",
                 Name = "Bob",
                 PhoneNumber = "1234567890",
                 ZipCode = "98052",
                 State = "WA",
-                Street = "15703 NE 61st Ct",
-                SecurityNumber = "456"
-            };
+                Street = "15703 NE 61st Ct"
+           };
 
             var result = await userManager.CreateAsync(bob, "Pass123$");
 

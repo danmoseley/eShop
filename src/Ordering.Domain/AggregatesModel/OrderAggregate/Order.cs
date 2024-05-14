@@ -32,8 +32,6 @@ public class Order
    
     public IReadOnlyCollection<OrderItem> OrderItems => _orderItems.AsReadOnly();
 
-    public int? PaymentId { get; private set; }
-
     public static Order NewDraft()
     {
         var order = new Order
@@ -49,19 +47,16 @@ public class Order
         _isDraft = false;
     }
 
-    public Order(string userId, string userName, Address address, int cardTypeId, string cardNumber, string cardSecurityNumber,
-            string cardHolderName, DateTime cardExpiration, int? buyerId = null, int? paymentMethodId = null) : this()
+    public Order(string userId, string userName, Address address, int? buyerId = null) : this()
     {
         BuyerId = buyerId;
-        PaymentId = paymentMethodId;
         OrderStatus = OrderStatus.Submitted;
         OrderDate = DateTime.UtcNow;
         Address = address;
 
         // Add the OrderStarterDomainEvent to the domain events collection 
         // to be raised/dispatched when committing changes into the Database [ After DbContext.SaveChanges() ]
-        AddOrderStartedDomainEvent(userId, userName, cardTypeId, cardNumber,
-                                    cardSecurityNumber, cardHolderName, cardExpiration);
+        AddOrderStartedDomainEvent(userId, userName);
     }
 
     // DDD Patterns comment
@@ -90,10 +85,9 @@ public class Order
         }
     }
 
-    public void SetPaymentMethodVerified(int buyerId, int paymentId)
+    public void SetPaymentMethodVerified(int buyerId)
     {
         BuyerId = buyerId;
-        PaymentId = paymentId;
     }
     
     public void SetAwaitingValidationStatus()
@@ -167,12 +161,9 @@ public class Order
         }
     }
 
-    private void AddOrderStartedDomainEvent(string userId, string userName, int cardTypeId, string cardNumber,
-            string cardSecurityNumber, string cardHolderName, DateTime cardExpiration)
+    private void AddOrderStartedDomainEvent(string userId, string userName)
     {
-        var orderStartedDomainEvent = new OrderStartedDomainEvent(this, userId, userName, cardTypeId,
-                                                                    cardNumber, cardSecurityNumber,
-                                                                    cardHolderName, cardExpiration);
+        var orderStartedDomainEvent = new OrderStartedDomainEvent(this, userId, userName);
 
         this.AddDomainEvent(orderStartedDomainEvent);
     }
